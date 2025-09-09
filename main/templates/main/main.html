@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Football Shop</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+
+        h1, h2 {
+            margin-bottom: 10px;
+        }
+
+        .info {
+            margin-bottom: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #ddd;
+            padding-bottom: 15px;
+        }
+
+        img {
+            display: block;
+            margin-bottom: 10px;
+        }
+
+        .product-name {
+            font-weight: bold;
+        }
+
+        .price {
+            color: green;
+        }
+
+        .category {
+            font-style: italic;
+            color: gray;
+        }
+
+        .featured {
+            color: orange;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Football Shop</h1>
+    <div class="info">
+        <p>NPM: {{ npm }}</p>
+        <p>Name: {{ name }}</p>
+        <p>Class: {{ class }}</p>
+    </div>
+
+    <h2>Daftar Produk</h2>
+    <ul>
+        {% for product in products %}
+            <li>
+                <img src="{{ product.thumbnail }}" alt="{{ product.name }}" width="120">
+                <span class="product-name">{{ product.name }}</span> -
+                <span class="price">Rp{{ product.price }}</span><br>
+                {{ product.description }} <br>
+                <span class="category">Kategori: {{ product.category }}</span><br>
+                {% if product.is_featured %}
+                    <span class="featured">⭐ Featured</span>
+                {% endif %}
+            </li>
+        {% empty %}
+            <p>Belum ada produk tersedia.</p>
+        {% endfor %}
+    </ul>
+</body>
+</html>
