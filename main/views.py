@@ -1,5 +1,8 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect, get_object_or_404
+from django.http import HttpResponse
+from django.core import serializers
 from .models import Product
+from .forms import ProductForm
 
 def show_main(request):
     products = Product.objects.all()
@@ -11,3 +14,42 @@ def show_main(request):
     }
     return render(request, "main/main.html", context)
 
+# Menampilkan semua objek dalam format XML
+def show_xml(request):
+    data = Product.objects.all()
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+# Menampilkan semua objek dalam format JSON
+def show_json(request):
+    data = Product.objects.all()
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+# Menampilkan objek berdasarkan ID dalam format XML
+def show_xml_by_id(request, id):
+    data = Product.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+
+# Menampilkan objek berdasarkan ID dalam format JSON
+def show_json_by_id(request, id):
+    data = Product.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+# Tambah produk baru
+def add_product(request):
+    if request.method == "POST":
+        form = ProductForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('main:show_main') # balik ke halaman utama setelah tambah produk
+    else:
+        form = ProductForm()
+    return render(request, "main/add_product.html", {'form': form})
+
+# Detail produk
+def product_detail(request, id):
+    product = get_object_or_404(Product, pk=id)
+    return render(request, "main/product_detail.html", {'product': product})
+
+def product_detail(request, id):
+    product = get_object_or_404(Product, pk=id)
+    return render(request, "main/product_detail.html", {"product": product})

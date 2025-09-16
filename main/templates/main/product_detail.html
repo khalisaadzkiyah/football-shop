@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h1>Detail Produk</h1>
+  <p><strong>Nama:</strong> {{ product.name }}</p>
+  <p><strong>Harga:</strong> Rp {{ product.price }}</p>
+  <p><strong>Deskripsi:</strong> {{ product.description }}</p>
+
+  <a href="{% url 'main:show_main' %}">Kembali</a>
+{% endblock %}
