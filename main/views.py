@@ -1,8 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.core import serializers
-from .models import Product
+from .models import Car, Product
 from .forms import ProductForm
+from .forms import CarForm
 
 def show_main(request):
     products = Product.objects.all()
@@ -14,25 +15,23 @@ def show_main(request):
     }
     return render(request, "main/main.html", context)
 
-# Menampilkan semua objek dalam format XML
 def show_xml(request):
-    data = Product.objects.all()
-    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
+    product_list = Product.objects.all()
+    xml_data = serializers.serialize("xml", product_list)
+    return HttpResponse(xml_data, content_type="application/xml")
 
-# Menampilkan semua objek dalam format JSON
 def show_json(request):
-    data = Product.objects.all()
-    return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+    product_list = Product.objects.all()
+    json_data = serializers.serialize("json", product_list)
+    return HttpResponse(json_data, content_type="application/json")
 
-# Menampilkan objek berdasarkan ID dalam format XML
-def show_xml_by_id(request, id):
-    data = Product.objects.filter(pk=id)
-    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
-
-# Menampilkan objek berdasarkan ID dalam format JSON
 def show_json_by_id(request, id):
     data = Product.objects.filter(pk=id)
     return HttpResponse(serializers.serialize("json", data), content_type="application/json")
+
+def show_xml_by_id(request, id):
+    data = Product.objects.filter(pk=id)
+    return HttpResponse(serializers.serialize("xml", data), content_type="application/xml")
 
 # Tambah produk baru
 def add_product(request):
@@ -50,6 +49,4 @@ def product_detail(request, id):
     product = get_object_or_404(Product, pk=id)
     return render(request, "main/product_detail.html", {'product': product})
 
-def product_detail(request, id):
-    product = get_object_or_404(Product, pk=id)
-    return render(request, "main/product_detail.html", {"product": product})
+

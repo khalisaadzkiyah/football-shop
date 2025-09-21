@@ -1,103 +1,59 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Football Shop</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
+<h1>Football Shop</h1>
 
-        h1, h2 {
-            margin-bottom: 10px;
-        }
+<h5>NPM:</h5>
+<p>{{ npm }}</p>
 
-        .info {
-            margin-bottom: 20px;
-        }
+<h5>Nama:</h5>
+<p>{{ name }}</p>
 
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
+<h5>Kelas:</h5>
+<p>{{ class }}</p>
 
-        li {
-            margin-bottom: 20px;
-            border-bottom: 1px solid #ddd;
-            padding-bottom: 15px;
-        }
+<a href="{% url 'main:add_product' %}">
+  <button>+ Tambah Produk</button>
+</a>
 
-        img {
-            display: block;
-            margin-bottom: 10px;
-        }
+<hr>
 
-        .product-name {
-            font-weight: bold;
-        }
+<a href="?filter=all">
+  <button type="button">Semua Produk</button>
+</a>
+<a href="?filter=featured">
+  <button type="button">Produk Unggulan</button>
+</a>
 
-        .price {
-            color: green;
-        }
+{% if not products %}
+  <p>Belum ada data produk pada Football Shop.</p>
+{% else %}
 
-        .category {
-            font-style: italic;
-            color: gray;
-        }
+  {% for product in products %}
+  <div>
+    <h2>
+      <a href="{% url 'main:product_detail' product.id %}">
+        {{ product.name }}
+      </a>
+    </h2>
 
-        .featured {
-            color: orange;
-            font-weight: bold;
-        }
+    <p>
+      <b>{{ product.category }}</b>
+      {% if product.is_featured %} | <b>Featured</b>{% endif %}
+      | <i>Rp {{ product.price }}</i>
+    </p>
 
-        .btn {
-            display: inline-block;
-            padding: 6px 12px;
-            margin-top: 5px;
-            margin-right: 5px;
-            font-size: 14px;
-            text-decoration: none;
-            border-radius: 4px;
-        }
+    {% if product.thumbnail %}
+      <img src="{{ product.thumbnail }}" alt="thumbnail" width="150" height="100">
+      <br />
+    {% endif %}
 
-        .btn-add {
-            background-color: #007bff;
-            color: white;
-        }
+    <p>{{ product.description|truncatewords:25 }}...</p>
 
-        .btn-detail {
-            background-color: #28a745;
-            color: white;
-        }
-    </style>
-</head>
-<body>
-    <h1>Football Shop</h1>
-    <div class="info">
-        <p>NPM: {{ npm }}</p>
-        <p>Name: {{ name }}</p>
-        <p>Class: {{ class }}</p>
-    </div>
+    <p>
+      <a href="{% url 'main:product_detail' product.id %}">
+        <button>Lihat Detail</button>
+      </a>
+    </p>
+  </div>
+  <hr>
+  {% endfor %}
 
-    <h2>Daftar Produk</h2>
-    <a href="{% url 'main:add_product' %}" class="btn btn-add">+ Add Produk</a>
-    <ul>
-        {% for product in products %}
-            <li>
-                <img src="{{ product.thumbnail }}" alt="{{ product.name }}" width="120">
-                <span class="product-name">{{ product.name }}</span> -
-                <span class="price">Rp{{ product.price }}</span><br>
-                {{ product.description }} <br>
-                <span class="category">Kategori: {{ product.category }}</span><br>
-                {% if product.is_featured %}
-                    <span class="featured">⭐ Featured</span>
-                {% endif %}
-                <br>
-                <a href="{% url 'main:product_detail' product.id %}" class="btn btn-detail">Detail</a>
-            </li>
-        {% empty %}
-            <p>Belum ada produk tersedia.</p>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% endif %}
