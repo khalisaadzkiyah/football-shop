@@ -1,9 +1,8 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from django.core import serializers
-from .models import Car, Product
+from .models import Product
 from .forms import ProductForm
-from .forms import CarForm
 
 def show_main(request):
     products = Product.objects.all()
