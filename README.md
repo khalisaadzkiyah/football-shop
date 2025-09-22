@@ -94,7 +94,7 @@ if form.is_valid():
     form.save()
 else:
     # tampilkan form.errors ke user
-
+```
 
 # 4. Mengapa perlu csrf_token di form Django? Risiko jika tidak ada?
 - csrf_token mencegah Cross-Site Request Forgery (CSRF): serangan yang memaksa browser user (yang sudah login) mengirim request (biasanya POST) ke situs kita melalui halaman jahat.
@@ -143,3 +143,58 @@ else:
 
 ### Feedback untuk Asdos
 Tutorial 2 sudah jelas dan membantu memahami konsep dasar. 
+
+# Tugas 4
+
+## 1. Apa itu Django AuthenticationForm?
+`AuthenticationForm` adalah form bawaan Django untuk proses login. Form ini otomatis menyediakan field `username` dan `password`, serta melakukan validasi dengan sistem autentikasi Django.
+**Kelebihan**:
+- Tidak perlu membuat form login dari nol.
+- Sudah terhubung dengan sistem autentikasi Django (cek password hash, validasi user aktif, dll).
+- Lebih aman karena Django sudah menyediakan proteksi standar.
+**Kekurangan**:
+- Kurang fleksibel untuk kustomisasi UI/UX.
+- Jika ingin menambahkan field tambahan (misalnya login dengan email), harus override form.
+
+# 2. Perbedaan Autentikasi dan Otorisasi
+**Autentikasi** -> proses verifikasi identitas pengguna (contoh: login dengan username dan password).
+**Otorisasi** -> proses verifikasi hak akses pengguna (contoh: hanya admin bisa hapus data).
+**Implementasi di Django**:
+- Autentikasi: handled oleh `django.contrib.auth` (fungsi `authenticate()`, `login()`, `logout()`).
+- Otorisasi: handled lewat `permissions`, `groups`, dan `decorator` seperti `@login_required` atau `@permission_required`.
+
+## 3. Kelebihan dan Kekurangan Session dan Cookies
+**Session**:
+- Kelebihan: aman karena data disimpan di server, hanya session ID di browser.
+- Kekurangan: butuh resource server lebih besar, data bisa hilang jika session expired.
+**Cookies**:
+- Kelebihan: ringan, data disimpan di browser, bisa dipakai lintas sesi (persistent cookie).
+- Kekurangan: kurang aman, karena data tersimpan di client bisa dimanipulasi.
+
+## 4. Apakah cookies aman secara default?
+**Tidak sepenuhnya aman**. Cookies bisa dicuri (misalnya lewat serangan XSS) atau dimanipulasi.
+**Risiko**: pencurian identitas, session hijacking, pelacakan pengguna.
+**Django handling**:
+- Cookies penting (misalnya sessionid, csrftoken) otomatis diberi proteksi dengan atribut `HttpOnly`, `Secure`, dan `SameSite`.
+- Ada middleware bawaan `CsrfViewMiddleware` untuk melindungi dari CSRF.
+
+## 5. Step-by-step Implementasi Checklist
+1. **Registrasi, login, logout**
+- Menambah fungsi `register`, `login_user`, `logout_user` di `views.py`.
+- Membuat template `register.html` dan `login.html`.
+- Memakai `UserCreationForm` dan `AuthenticationForm`.
+2. **Membuat 2 akun + 3 dummy data tiap akun**
+- Menjalankan `python manage.py createsuperuser` atau register via halaman web.
+- Masukkan dummy data ke model `Product` melalui form/tambah manual di admin.
+3. **Menghubungkan model Product dengan User**
+- Menambahkan field `user = models.ForeignKey(User, on_delete=models.CASCADE)` pada model `Product`.
+- Saat menyimpan produk baru, isi `product.user = request.user`.
+4. **Menampilkan informasi pengguna + last_login**
+- Pada view `show_main`, ambil `request.user.username`.
+- Simpan `last_login` di cookies saat login:
+```python
+response.set_cookie('last_login', str(datetime.datetime.now()))
+```
+- Menampilkan di template `main.html`.
+5. **Push ke GitHub**
+Menjalankan `git add .`, `git commit -m "Tugas 4 selesai"`, `git push origin main`.
