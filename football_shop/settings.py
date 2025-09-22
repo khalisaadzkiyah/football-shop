@@ -26,7 +26,12 @@ SECRET_KEY = 'django-insecure-3hr@zapzm+b%r=uv20a(cb0mapq$z^4am!ucaczm*b-u+2da9i
 DEBUG = True
 
 ALLOWED_HOSTS = ["localhost", "127.0.0.1", "khalisa-adzkiyah-footballshop.pbp.cs.ui.ac.id"]
-CSRF_TRUSTED_ORIGIN = ["https://khalisa-adzkiyah-footballshop.pbp.cs.ui.ac.id"]
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://khalisa-adzkiyah-footballshop.pbp.cs.ui.ac.id",
+    "http://khalisa-adzkiyah-footballshop.pbp.cs.ui.ac.id",
+]
+
 
 # Application definition
 
