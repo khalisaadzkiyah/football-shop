@@ -198,3 +198,88 @@ response.set_cookie('last_login', str(datetime.datetime.now()))
 - Menampilkan di template `main.html`.
 5. **Push ke GitHub**
 Menjalankan `git add .`, `git commit -m "Tugas 4 selesai"`, `git push origin main`.
+
+# Tugas 5
+
+# 1. Jika terdapat beberapa CSS selector untuk suatu elemen HTML, jelaskan urutan prioritas pengambilan CSS selector tersebut
+Urutan prioritas (dari yang paling kuat ke lemah):
+1. **Origin & Importance**
+- `!important`dari author > `!important` dari user > style biasa.
+- Penjelasan: aturan dengan `!important` akan meng-override aturan lain kecuali ada `!important` dengan origin yang lebih tinggi.
+2. **Specificity (Kekhususan selector)**
+- Inline style (mis. `style="..."`) -> paling tinggi.
+- ID selector (`#id`) -> tinggi.
+- Class / attribute / pseudo-class (`.class`, `[attr]`, `:hover`) -> sedang.
+- Element / pseudo-element (`div`, `p`, `::after`) -> rendah.
+3. **Order of appearance (urutan sumber/penulisan)**
+- Jika specificity sama, maka yang muncul belakangan (terakhir dimuat) yang berlaku.
+- Contoh: dua file CSS: `styles1.css` lalu `styles2.css` — aturan di `styles2.css` akan menang bila equal specificity.
+4. **Initial & inherited properties**
+Properti yang diwariskan (mis. color, font-family) bisa diwarisi dari parent jika tidak ditentukan pada element.
+Contoh:
+```python
+<h1 id="title" class="big" style="color: red;">Judul</h1>
+```
+Aturan `style="color: red;"` (inline) akan menang atas `#title { color: aqua; }` dan `.big { color: cadetblue; }` dan `h1 { color: blue; }`.
+
+# 2. Mengapa responsive design penting? Berikan contoh aplikasi yang sudah dan belum menerapkan responsive design, serta jelaskan mengapa
+**Mengapa penting:**
+- Pengguna mengakses web dari berbagai perangkat (hp, tablet, desktop). Responsive memastikan UI tetap usable dan accessible.
+- Meningkatkan pengalaman pengguna (UX) dan menurunkan bounce rate.
+- Baik untuk SEO: mesin pencari memprioritaskan mobile-friendly sites.
+- Hemat biaya: satu basis kode untuk berbagai ukuran layar.
+**Contoh aplikasi yang sudah menerapkan responsive design:**
+- Google Search / Google Maps - antarmuka menyesuaikan layout dan fitur (hamburger menu, responsive map controls).
+- Bootstrap-based sites - menggunakan grid system dan utility class untuk mobile-first.
+**Contoh aplikasi yang kurang/kurang baik menerapkan responsive design:**
+Situs lama yang dibuat khusus untuk desktop (mis. beberapa portal berita jadul atau intranet perusahaan lama) biasanya menampilkan layout kaku, font kecil, dan butuh scroll horizontal di mobile.
+**Kenapa perbedaan terjadi:**
+Situs modern dirancang mobile-first dan memakai media queries, unit responsif (%, rem, vw) serta framework. Situs lama sering mengandalkan fixed widths (px), layout tabel, dan tidak diuji di perangkat lain.
+
+# 3. Perbedaan antara margin, border, dan padding, serta cara mengimplementasikannya
+- **Margin**: ruang di luar border elemen — memisahkan elemen dengan elemen lain.
+- **Border**: garis pinggir di sekitar elemen (terletak di antara padding dan margin).
+- **Padding**: ruang di dalam border — memisahkan isi (content) dari border.
+**Box model**: `margin` -> `border` -> `padding` -> `content`.
+**Praktik implementasi (CSS)**:
+```python
+/* Menggunakan box-sizing: border-box untuk membuat perhitungan ukuran lebih intuitif */
+* { box-sizing: border-box; }
+
+.card {
+margin: 1rem;  /* jarak antar elemen */
+border: 1px solid #ccc; /* garis pinggir */
+padding: 1rem; /* jarak isi terhadap border */
+}
+```
+Gunakan satuan relatif (`rem`, `%`, `vw`) agar lebih responsif.
+
+# 4. Konsep Flexbox dan Grid Layout beserta kegunaannya
+**Flexbox (Flexible Box Layout)**
+- Fokus pada one-dimensional layout (baris `atau` kolom).
+- Bagus untuk: navbar, card rows, align item center, distribusi ruang antar item.
+- Properti penting: `display: flex;`, `flex-direction`, `justify-content`, `align-items`, `flex-wrap`, `gap`, `flex` (shorthand untuk `flex-grow`, `flex-shrink`, `flex-basis`).
+**Contoh**:
+```python
+.container { display: flex; gap: 1rem; align-items: center; }
+.item { flex: 1; }
+```
+**Grid Layout**
+- Fokus pada two-dimensional layout (baris `dan` kolom).
+- Cocok untuk layout halaman lengkap: header, sidebar, main, footer; atau galeri foto.
+- Properti penting: `display: grid;`, `grid-template-columns`, `grid-template-rows`, `grid-gap`/`gap`, `grid-area`, `auto-fit`/`auto-fill` dengan `minmax()`.
+**Contoh**:
+```python
+.grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+```
+**Kapan pakai apa?**
+- Menggunakan `Flexbox` untuk komponen baris/kolom dan alignment internal.
+- Menggunakan `Grid` untuk layout halaman yang kompleks dan pengaturan area besar.
+- Keduanya sering dipadukan - Grid untuk layout utama, Flexbox untuk konten dalam area grid.
+
+# 5. Cara saya mengerjakan checklist tugas ini
+1. Menambahkan fitur edit dan delete product di views dan urls, lalu memastikan hanya pemilik product yang bisa mengubah atau menghapus.
+2. Mengubah desain halaman login, register, tambah product, edit product, dan detail product supaya lebih menarik dengan CSS/Framework.
+3. membuat halaman daftar product jadi lebih menarik: kalau kosong muncul gambar + pesan, kalau ada product muncul dalam bentuk card dengan tombol Edit dan Delete.
+4. membuat navbar yang responsif: di layar besar tampil penuh, di layar kecil berubah jadi tombol hamburger.
+5. lakukan pengecekan di browser (mobile dan desktop) untuk memastikan semuanya berjalan dengan baik, lalu commit dan push ke GitHub.

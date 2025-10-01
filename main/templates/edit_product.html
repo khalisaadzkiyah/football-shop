@@ -1,7 +1,8 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block meta %}
-<title>Add Product - Socceria</title>
+<title>Edit Product - Socceria</title>
 {% endblock meta %}
 
 {% block content %}
@@ -18,8 +19,8 @@
     <!-- Form Card -->
     <div class="bg-white rounded-lg border border-pink-200 p-6 sm:p-8 form-style shadow-sm">
       <div class="mb-8">
-        <h1 class="text-2xl font-bold text-[#831843] mb-2">Add New Product</h1>
-        <p class="text-[#831843] text-sm">Add a new product to your Socceria catalog</p>
+        <h1 class="text-2xl font-bold text-[#831843] mb-2">Edit Product</h1>
+        <p class="text-[#831843] text-sm">Update your product information in the Socceria catalog</p>
       </div>
 
       <form method="POST" class="space-y-6">
@@ -47,7 +48,7 @@
             Cancel
           </a>
           <button type="submit" class="order-1 sm:order-2 flex-1 bg-pink-400 text-white px-6 py-3 rounded-md font-medium hover:bg-pink-500 transition-colors">
-            Add Product
+            Update Product
           </button>
         </div>
       </form>
@@ -55,4 +56,4 @@
 
   </div>
 </div>
-{% endblock content %}
+{% endblock %}

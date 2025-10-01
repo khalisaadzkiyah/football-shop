@@ -1,0 +1,73 @@
+.form-style form input,
+.form-style form textarea,
+.form-style form select {
+    width: 100%;
+    padding: 0.5rem;
+    border: 2px solid #e0c7d7; /* soft pink border */
+    border-radius: 0.375rem;
+    background-color: #fff0f6; /* very soft pink background */
+    color: #831843; /* text color dark magenta/purple */
+    transition: all 0.2s;
+}
+
+.form-style form input:focus,
+.form-style form textarea:focus,
+.form-style form select:focus {
+    outline: none;
+    border-color: #ec4899; /* bright pink focus */
+    box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.2);
+}
+
+.form-style input[type="checkbox"] {
+    width: 1.25rem;
+    height: 1.25rem;
+    padding: 0;
+    border: 2px solid #f3d4e0; /* light pink border */
+    border-radius: 0.375rem;
+    background-color: white;
+    cursor: pointer;
+    position: relative;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    transition: all 0.2s;
+}
+
+.form-style input[type="checkbox"]:checked {
+    background-color: #ec4899; /* bright pink check */
+    border-color: #ec4899;
+}
+
+.form-style input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-weight: bold;
+    font-size: 0.875rem;
+}
+
+.form-style input[type="checkbox"]:focus {
+    outline: none;
+    border-color: #ec4899;
+    box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.2);
+}
+
+.form-style button,
+.form-style input[type="submit"] {
+    background-color: #ec4899; /* main button pink */
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.form-style button:hover,
+.form-style input[type="submit"]:hover {
+    background-color: #db2777; /* darker pink on hover */
+}
