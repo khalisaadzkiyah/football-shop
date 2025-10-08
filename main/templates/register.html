@@ -83,14 +83,35 @@
           </button>
         </form>
 
+        <script>
+        document.getElementById('registerForm').addEventListener('submit', async function(e) {
+            e.preventDefault(); // cegah reload page
+            const formData = new FormData(this);
+
+            const response = await fetch("{% url 'main:ajax_register' %}", {
+                method: 'POST',
+                headers: {'X-Requested-With': 'XMLHttpRequest'},
+                body: formData
+            });
+
+            const data = await response.json();
+            if(data.status === 'success'){
+                showToast(data.message, '', 'success');  // pakai toast.html
+                setTimeout(() => window.location.href = "{% url 'main:login' %}", 1500);
+            } else {
+                showToast(data.message, '', 'error');    // pakai toast.html
+            }
+        });
+        </script>
+
         <!-- Messages Display -->
         {% if messages %}
           <div class="mt-6">
             {% for message in messages %}
               <div class="px-4 py-3 rounded text-sm border
-                {% if message.tags == 'success' %} bg-green-50 border-green-200 text-green-700
-                {% elif message.tags == 'error' %} bg-red-50 border-red-200 text-red-700
-                {% else %} bg-gray-50 border-gray-200 text-gray-700 {% endif %}">
+                {% if message.tags == 'success' %} bg-[#FFF0F6] border-[#F5C6DD] text-[#831843]
+                {% elif message.tags == 'error' %} bg-[#FFE4EC] border-[#F5A3C0] text-[#831843]
+                {% else %} bg-[#FFF0F6] border-[#F5C6DD] text-[#831843] {% endif %}">
                 {{ message }}
               </div>
             {% endfor %}

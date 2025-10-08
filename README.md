@@ -283,3 +283,45 @@ Gunakan satuan relatif (`rem`, `%`, `vw`) agar lebih responsif.
 3. membuat halaman daftar product jadi lebih menarik: kalau kosong muncul gambar + pesan, kalau ada product muncul dalam bentuk card dengan tombol Edit dan Delete.
 4. membuat navbar yang responsif: di layar besar tampil penuh, di layar kecil berubah jadi tombol hamburger.
 5. lakukan pengecekan di browser (mobile dan desktop) untuk memastikan semuanya berjalan dengan baik, lalu commit dan push ke GitHub.
+
+# Tugas 6
+
+# 1. Perbedaan antara Synchronous Request dan Asynchronous Request
+**Synchronous Request:**
+- Browser menunggu server merespons sebelum melakukan aksi berikutnya.
+- Biasanya menyebabkan reload halaman setiap kali ada request.
+- Contoh: form submit biasa di Django tanpa AJAX.
+**Asynchronous Request (AJAX):**
+- Browser tidak perlu menunggu halaman reload.
+- Request dikirim ke server di background, dan respons ditangani dengan JavaScript.
+- Contoh: submit form login/register atau CRUD product tanpa reload halaman.
+
+# 2. Bagaimana AJAX bekerja di Django (alur request–response)
+1. User melakukan aksi di browser (misal klik tombol Submit).
+2. JavaScript menangkap event dan membuat AJAX request (biasanya fetch() atau XMLHttpRequest).
+3. Request dikirim ke endpoint Django (misal ajax-login atau add-product-ajax).
+4. Django memproses request seperti biasa (validasi, query database).
+5. Django mengirimkan response JSON atau HTTP.
+6. JavaScript menerima response dan memperbarui UI tanpa reload halaman (misal menampilkan toast, update list product).
+
+# 3. Keuntungan menggunakan AJAX dibandingkan render biasa di Django
+- Tidak perlu reload halaman, sehingga lebih cepat dan smooth.
+- UX lebih baik, karena user tetap berada di halaman yang sama tanpa kehilangan input atau posisi scroll.
+- Partial update: hanya bagian yang berubah (misal list product) yang diupdate, bukan seluruh halaman.
+- Feedback instan: loading spinner, toast sukses/gagal, state empty/error.
+
+# 4. Cara memastikan keamanan saat menggunakan AJAX untuk fitur Login dan Register di Django
+CSRF protection:
+- Kirim token CSRF di header setiap AJAX request POST.
+- Contoh: headers: { 'X-CSRFToken': csrftoken }.
+Validasi server-side tetap wajib:
+- Cek username/password di server, jangan hanya di client.
+Menggunakan HTTPS untuk mengamankan data sensitif.
+Rate limiting / login attempts opsional untuk mencegah brute force attack.
+
+# 5. Bagaimana AJAX mempengaruhi pengalaman pengguna (User Experience) pada website
+- Memberikan feedback instan tanpa reload halaman.
+- Meminimalkan gangguan, user tetap berada di konteks yang sama.
+- Mempercepat interaksi karena hanya bagian yang perlu diupdate saja.
+- Memungkinkan efek visual menarik seperti loading spinner, modal interaktif, toast notifications.
+- Secara keseluruhan membuat website terasa lebih responsif dan modern.
