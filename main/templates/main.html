@@ -187,7 +187,14 @@ async function submitProductForm() {
   fetchProducts();
 }
 
-document.getElementById('productForm').addEventListener('submit', e=>{ e.preventDefault(); submitProductForm(); });
+const productForm = document.getElementById('productForm');
+productForm.addEventListener('submit', handleSubmitOnce);
+
+function handleSubmitOnce(e) {
+  e.preventDefault();
+  submitProductForm();
+  productForm.removeEventListener('submit', handleSubmitOnce); // cegah double trigger
+}
 
 async function deleteProduct(id){
   if(!confirm('Are you sure you want to delete this product?')) return;
