@@ -1,16 +1,17 @@
 {% load static %}
 <div 
-    class="fixed bottom-8 right-8 p-4 px-8 rounded-xl shadow-xl z-50 opacity-0 transition-all duration-300 translate-y-64 flex items-center gap-4"
+    class="fixed bottom-8 right-8 p-4 px-6 rounded-xl shadow-xl z-50 opacity-0 transition-all duration-300 translate-y-64 flex items-center gap-4 bg-pink-50 border border-pink-200"
     id="toast-component"
 >
-    <span id="toast-icon" class="text-2xl"></span>
+    <span id="toast-icon" class="text-2xl text-pink-600"></span>
     <div>
-        <h3 class="font-bold" id="toast-title">
-            This is a Sample Title
+        <h3 class="font-bold text-pink-700" id="toast-title">
+            Sample Notification
         </h3>
-        <p class="text-gray-700 text-sm line-clamp-3" id="toast-message">
-            This is a Sample Message
+        <p class="text-pink-800 text-sm line-clamp-3" id="toast-message">
+            Product added successfully!
         </p>
     </div>
 </div>
+
 <script src="{% static 'js/toast.js' %}"></script>

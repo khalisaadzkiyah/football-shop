@@ -1,8 +1,7 @@
 {% extends 'base.html' %}
-{% load static %}
 
 {% block meta %}
-<title>Edit Product - Socceria</title>
+<title>Add Product - Socceria</title>
 {% endblock meta %}
 
 {% block content %}
@@ -20,16 +19,15 @@
     <!-- Form -->
     <div class="bg-white rounded-2xl border border-pink-100 shadow-sm p-6 sm:p-8 form-style">
       <div class="mb-8 text-center">
-        <h1 class="text-2xl font-bold text-pink-900 mb-2">Edit Product</h1>
-        <p class="text-gray-600">Update your football merchandise details</p>
+        <h1 class="text-2xl font-bold text-pink-900 mb-2">Add New Product</h1>
+        <p class="text-gray-600">List your football merchandise or gear for fans to explore</p>
       </div>
       
       <form method="POST" class="space-y-6">
         {% csrf_token %}
         {% for field in form %}
           <div>
-            <label for="{{ field.id_for_label }}" 
-                   class="block text-sm font-medium text-pink-800 mb-2">
+            <label for="{{ field.id_for_label }}" class="block text-sm font-medium text-pink-800 mb-2">
               {{ field.label }}
             </label>
             <div class="w-full">
@@ -52,7 +50,7 @@
           </a>
           <button type="submit" 
                   class="order-1 sm:order-2 flex-1 bg-pink-500 text-white px-6 py-3 rounded-md font-medium hover:bg-pink-600 transition-colors">
-            Update Product
+            Publish Product
           </button>
         </div>
       </form>

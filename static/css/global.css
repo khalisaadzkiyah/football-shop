@@ -3,39 +3,41 @@
 .form-style form select {
     width: 100%;
     padding: 0.5rem;
-    border: 2px solid #e0c7d7; /* soft pink border */
-    border-radius: 0.375rem;
-    background-color: #fff0f6; /* very soft pink background */
-    color: #831843; /* text color dark magenta/purple */
-    transition: all 0.2s;
+    border: 2px solid #ff99cc; 
+    border-radius: 0.5rem;
+    background-color: #fff0f6; 
+    color: #4b0033; 
+    font-family: 'Poppins', sans-serif;
+    transition: all 0.2s ease-in-out;
 }
 
 .form-style form input:focus,
 .form-style form textarea:focus,
 .form-style form select:focus {
     outline: none;
-    border-color: #ec4899; /* bright pink focus */
-    box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.2);
+    border-color: #ff66b3; 
+    box-shadow: 0 0 0 3px rgba(255, 102, 179, 0.3);
+    background-color: #ffe6f0;
 }
 
 .form-style input[type="checkbox"] {
     width: 1.25rem;
     height: 1.25rem;
     padding: 0;
-    border: 2px solid #f3d4e0; /* light pink border */
+    border: 2px solid #ff99cc;
     border-radius: 0.375rem;
-    background-color: white;
+    background-color: #fff;
     cursor: pointer;
     position: relative;
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-    transition: all 0.2s;
+    transition: all 0.2s ease;
 }
 
 .form-style input[type="checkbox"]:checked {
-    background-color: #ec4899; /* bright pink check */
-    border-color: #ec4899;
+    background-color: #ff66b3;
+    border-color: #ff66b3;
 }
 
 .form-style input[type="checkbox"]:checked::after {
@@ -51,23 +53,28 @@
 
 .form-style input[type="checkbox"]:focus {
     outline: none;
-    border-color: #ec4899;
-    box-shadow: 0 0 0 3px rgba(236, 72, 153, 0.2);
+    border-color: #b30059;
+    box-shadow: 0 0 0 3px rgba(179, 0, 89, 0.2);
+}
+
+.form-style label {
+    font-weight: 600;
+    color: #b30059;
 }
 
 .form-style button,
 .form-style input[type="submit"] {
-    background-color: #ec4899; /* main button pink */
+    background-color: #ff66b3;
     color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    font-weight: 500;
+    font-weight: 600;
     border: none;
+    border-radius: 0.5rem;
+    padding: 0.6rem 1.2rem;
     cursor: pointer;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s ease;
 }
 
 .form-style button:hover,
 .form-style input[type="submit"]:hover {
-    background-color: #db2777; /* darker pink on hover */
+    background-color: #e0559f;
 }
